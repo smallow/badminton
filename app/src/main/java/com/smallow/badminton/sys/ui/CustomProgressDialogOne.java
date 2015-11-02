@@ -2,6 +2,7 @@ package com.smallow.badminton.sys.ui;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.widget.TextView;
 
 import com.smallow.badminton.R;
 
@@ -11,6 +12,7 @@ import com.smallow.badminton.R;
 public class CustomProgressDialogOne extends Dialog{
 
     private String text;
+    private TextView textView;
 
     public CustomProgressDialogOne(Context context) {
         super(context);
@@ -18,6 +20,7 @@ public class CustomProgressDialogOne extends Dialog{
 
     public CustomProgressDialogOne(Context context, String string) {
         super(context, R.style.custom_progress_dialog_one_style);
+        this.text=string;
         init();
     }
 
@@ -28,5 +31,10 @@ public class CustomProgressDialogOne extends Dialog{
 
     private void init(){
         setContentView(R.layout.custom_progress_dialog_one_layout);
+        textView=(TextView)findViewById(R.id.text);
+        if(text!=null)
+            textView.setText(text);
+        else
+            textView.setText("正在处理请稍后...");
     }
 }
