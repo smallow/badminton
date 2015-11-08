@@ -1,6 +1,7 @@
 <resources>
 
 
+
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- translucent system bars -->
         <!--        <item name="android:windowTranslucentStatus">true</item>
