@@ -13,7 +13,7 @@ import android.widget.FrameLayout;
 import com.smallow.badminton.sys.base.BaseActivity;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     //#F14E41
     private long firstTime;
     private Toolbar toolbar;
@@ -33,15 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("爱羽玩");
-        setSupportActionBar(toolbar);
+       // setSupportActionBar(toolbar);
+        toolbar.inflateMenu(R.menu.menu_main);
         fl_content = (FrameLayout) findViewById(R.id.fl_content);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        menu.getItem(0).setTitle(sp.getBoolean("isLight", true) ? "夜间模式" : "日间模式");
-        return true;
-    }
+
 
 
     @Override
