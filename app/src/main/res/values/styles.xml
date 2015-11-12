@@ -88,4 +88,6 @@
         <item name="android:windowEnterAnimation">@anim/custom_progress_dialog_one_fading_in</item>
         <item name="android:windowExitAnimation">@anim/custom_progress_dialog_one_fading_out</item>i
     </style>
+
+
 </resources>

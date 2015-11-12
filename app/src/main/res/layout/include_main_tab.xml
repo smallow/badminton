@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tab_bg"
+    android:orientation="horizontal">
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/main_tab1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="报名"
+            android:textColor="@color/tab_selector_tv_color"
+            android:textSize="18sp"
+            android:checked="true"
+            />
+
+        <RadioButton
+            android:id="@+id/main_tab2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="探索"
+            android:textColor="@color/tab_selector_tv_color"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/main_tab3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="发现"
+            android:textColor="@color/tab_selector_tv_color"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/main_tab4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="我"
+            android:textColor="@color/tab_selector_tv_color"
+            android:textSize="18sp" />
+    </RadioGroup>
+
+
+</LinearLayout>

@@ -5,7 +5,7 @@
 
 
 
-    <item
+    <!--<item
         android:id="@+id/ac_toolbar_copy"
         android:orderInCategory="60"
         android:title="复制"
@@ -14,21 +14,20 @@
         android:id="@+id/ac_toolbar_cut"
         android:orderInCategory="70"
         android:title="剪切"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" />-->
     <item
-        android:id="@+id/ac_toolbar_del"
+        android:id="@+id/ac_toolbar_reg"
         android:orderInCategory="80"
-        android:title="删除"
+        android:title="邀请注册"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/ac_toolbar_edit"
+        android:id="@+id/ac_toolbar_jq"
         android:orderInCategory="90"
-        android:title="编辑"
+        android:title="申请加群"
         app:showAsAction="ifRoom" />
-
     <item
-        android:id="@+id/ac_toolbar_email"
+        android:id="@+id/ac_toolbar_rm"
         android:orderInCategory="100"
-        android:title="邮箱"
+        android:title="申请入盟"
         app:showAsAction="ifRoom" />
 </menu>
