@@ -14,7 +14,7 @@ import com.smallow.badminton.R;
  */
 public class CustomProgressDialogThree extends Dialog {
 
-    private String mMsg = "Loading";
+    private String mMsg = "正在加载数据请稍后...";
 
     public void setMsg(String msg)
     {

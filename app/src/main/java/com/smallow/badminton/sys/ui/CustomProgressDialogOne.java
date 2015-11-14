@@ -11,16 +11,14 @@ import com.smallow.badminton.R;
  */
 public class CustomProgressDialogOne extends Dialog{
 
-    private String text;
+
     private TextView textView;
 
-    public CustomProgressDialogOne(Context context) {
-        super(context);
-    }
+    private String text;
 
-    public CustomProgressDialogOne(Context context, String string) {
+    public CustomProgressDialogOne(Context context) {
         super(context, R.style.custom_progress_dialog_one_style);
-        this.text=string;
+
         init();
     }
 
@@ -36,5 +34,10 @@ public class CustomProgressDialogOne extends Dialog{
             textView.setText(text);
         else
             textView.setText("正在处理请稍后...");
+    }
+
+    public void setMsg(String msg)
+    {
+        this.text = msg;
     }
 }
