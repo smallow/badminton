@@ -41,7 +41,7 @@ public abstract class BaseFragment extends Fragment {
             Log.d(TAG, getClass().getCanonicalName()
                     + " on view created,but content view was null ");
         }
-        customProgressDialogOne=new CustomProgressDialogThree(getActivity());
+        customProgressDialog=new CustomProgressDialogThree(getActivity());
         onInitWidgets(view, savedInstanceState);
     }
 
@@ -49,7 +49,7 @@ public abstract class BaseFragment extends Fragment {
                                           Bundle savedInstanceState);
 
 
-    private CustomProgressDialogThree customProgressDialogOne;
+    private CustomProgressDialogThree customProgressDialog;
 
 
 
@@ -58,14 +58,14 @@ public abstract class BaseFragment extends Fragment {
 
             @Override
             public void run() {
-                customProgressDialogOne.setCancelable(false);
+                customProgressDialog.setCancelable(false);
                 // TODO Auto-generated method stub
                 if (text != null) {
-                    customProgressDialogOne.setMsg(text);
+                    customProgressDialog.setMsg(text);
                 }
                 try {
-                    if (!customProgressDialogOne.isShowing()) {
-                        customProgressDialogOne.show();
+                    if (!customProgressDialog.isShowing()) {
+                        customProgressDialog.show();
                     }
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
@@ -82,8 +82,8 @@ public abstract class BaseFragment extends Fragment {
             @Override
             public void run() {
                 // TODO Auto-generated method stub
-                if (customProgressDialogOne.isShowing()) {
-                    customProgressDialogOne.dismiss();
+                if (customProgressDialog.isShowing()) {
+                    customProgressDialog.dismiss();
                 }
             }
         });

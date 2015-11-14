@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:indeterminate="false" />
+            android:indeterminateDrawable="@drawable/juhua_loading"/>
 
         <TextView
             android:id="@+id/id_dialog_loading_msg"
