@@ -3,4 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+
+
+    <drawable name="baoming_submit_normal">#F14E41</drawable>
+    <drawable name="baoming_submit_pressed">#a44100</drawable>
 </resources>

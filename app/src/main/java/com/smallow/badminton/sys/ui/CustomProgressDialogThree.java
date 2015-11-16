@@ -15,10 +15,10 @@ import com.smallow.badminton.R;
 public class CustomProgressDialogThree extends Dialog {
 
     private String mMsg = "正在加载数据请稍后...";
-
+    TextView title;
     public void setMsg(String msg)
     {
-        this.mMsg = msg;
+        title.setText(msg);
     }
 
     public CustomProgressDialogThree(Context context) {
@@ -29,7 +29,7 @@ public class CustomProgressDialogThree extends Dialog {
 
     private void init(){
         setContentView(R.layout.custom_progress_dialog_three_layout);
-        TextView title = (TextView)findViewById(R.id.id_dialog_loading_msg);
+        title= (TextView)findViewById(R.id.id_dialog_loading_msg);
         title.setText(mMsg);
     }
 

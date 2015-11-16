@@ -1,13 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="wrap_content"
+
+
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="我的"
-        android:id="@+id/textView"
-        android:layout_gravity="center_vertical"
-        />
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+
+
+            <!-- 个人信息 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/default_bottom_border_line"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="8dp" >
+
+                    <ImageView
+                        android:id="@+id/fragment_mine_touxiang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/default_touxiang" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="11dp"
+                    android:paddingTop="28dp"
+                    android:paddingRight="5dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/fragment_mine_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="喜洋洋"
+                        android:textColor="#2f2f2f"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/fragment_mine_department"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/fragment_mine_name"
+                        android:layout_marginTop="11dp"
+                        android:text="管理员"
+                        android:textColor="#cccccc"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/mine_jiantou"
+                        android:layout_width="20dp"
+                        android:layout_height="15dp"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/default_right_jiantou" />
+                </RelativeLayout>
+            </LinearLayout>
+            <!-- 个人信息结束 -->
+
+
+            <!-- 页面分割线 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="17dp"
+                android:background="@drawable/default_bottom_border_line_for_divider"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <!-- 我的帐号-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:background="#ffffff"
+                android:orientation="horizontal"
+                android:paddingLeft="11dp"
+                android:paddingTop="5dp" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/mine_hdjl" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="8"
+                    android:background="@drawable/default_bottom_border_line"
+                    android:paddingBottom="3dp"
+                    android:paddingTop="13dp"
+                    android:paddingRight="5dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/mine_tv_zhanghao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="我的活动记录"
+                        android:textColor="#313131"
+                        android:textSize="16sp" />
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="20dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/default_right_jiantou" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:background="@drawable/default_bottom_border_line"
+                android:orientation="horizontal"
+                android:paddingLeft="11dp"
+                android:paddingTop="5dp" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/mine_message" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="8"
+                    android:paddingBottom="3dp"
+                    android:paddingTop="13dp"
+                    android:paddingRight="5dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/mine_tv_xiaoxi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="我的缴费记录"
+                        android:textColor="#313131"
+                        android:textSize="16sp" />
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/default_right_jiantou" />
+
+                </RelativeLayout>
+            </LinearLayout>
+            <!-- 我的帐号结束 -->
+
+            <!-- 页面分割线 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="17dp"
+                android:background="@drawable/default_bottom_border_line_for_divider"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+
+
+
+
+
+            <!-- 设置 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:background="@drawable/default_bottom_border_line"
+                android:orientation="horizontal"
+                android:paddingLeft="11dp"
+                android:paddingTop="5dp" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/mine_shezhi" />
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="8"
+
+                    android:paddingBottom="3dp"
+                    android:paddingTop="13dp"
+                    android:paddingRight="5dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/mine_tv_shezhi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="设置"
+                        android:textColor="#313131"
+                        android:textSize="16sp" />
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/default_right_jiantou" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            <!-- 设置 结束-->
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
