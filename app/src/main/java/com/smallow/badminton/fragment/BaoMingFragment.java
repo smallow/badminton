@@ -1,12 +1,11 @@
 package com.smallow.badminton.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +14,8 @@ import com.smallow.badminton.R;
 import com.smallow.badminton.bean.BaoMingPersona;
 import com.smallow.badminton.sys.Constant;
 import com.smallow.badminton.sys.base.BaseFragment;
-import com.smallow.badminton.sys.base.InnerBaseAdapter;
+import com.smallow.badminton.sys.common.CommonBaseAdapter;
+import com.smallow.badminton.sys.common.ViewHolder;
 import com.smallow.badminton.sys.ui.MyGridView;
 import com.smallow.badminton.sys.utils.HttpUtils;
 
@@ -29,10 +29,9 @@ import java.util.List;
  */
 public class BaoMingFragment extends BaseFragment implements View.OnClickListener {
     private List<BaoMingPersona> data = new ArrayList<BaoMingPersona>();
-
-    private PersonalAdapter adapter;
     private MyGridView gridView;
     private TextView baomingSubmit;
+    private PersonalAdapter adapter;
 
     @Nullable
     @Override
@@ -42,12 +41,13 @@ public class BaoMingFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     protected void onInitWidgets(View rootView, Bundle savedInstanceState) {
+        loadData();
         gridView = (MyGridView) findViewById(R.id.baoming_grid);
-        adapter = new PersonalAdapter(data);
+        adapter=new PersonalAdapter(getActivity(),data,R.layout.adapter_baoming_personal_item);
         gridView.setAdapter(adapter);
         baomingSubmit = findViewById(R.id.baoming_submit);
         baomingSubmit.setOnClickListener(this);
-        loadData();
+
     }
 
     private void loadData() {
@@ -129,33 +129,16 @@ public class BaoMingFragment extends BaseFragment implements View.OnClickListene
         }
     }
 
-    class PersonalAdapter extends InnerBaseAdapter<BaoMingPersona> {
 
-        public PersonalAdapter(List<BaoMingPersona> data) {
-            setData(data, false);
+    class PersonalAdapter extends CommonBaseAdapter<BaoMingPersona> {
+        PersonalAdapter(Context context, List<BaoMingPersona> mDatas, int itemLayoutId) {
+            super(context, mDatas, itemLayoutId);
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHoler viewHoler;
-            if (convertView == null) {
-                viewHoler = new ViewHoler();
-                convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_baoming_personal_item, null);
-                viewHoler.name = (TextView) convertView.findViewById(R.id.baoming_personal_name);
-                viewHoler.img = (ImageView) convertView.findViewById(R.id.baoming_personal_img);
-                convertView.setTag(viewHoler);
-            } else {
-                viewHoler = (ViewHoler) convertView.getTag();
-            }
-
-            BaoMingPersona bean = getData(position);
-            viewHoler.name.setText(bean.getName());
-            return convertView;
-        }
-
-        class ViewHoler {
-            TextView name;
-            ImageView img;
+        public void convert(ViewHolder viewHolder, BaoMingPersona item) {
+            viewHolder.setText(R.id.baoming_personal_name, item.getName());
         }
     }
+
 }

@@ -25,4 +25,6 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'com.loopj.android:android-async-http:1.4.8'
+    compile project(':autolayout')
+
 }

@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.smallow.badminton.fragment.BaoMingFragment;
 import com.smallow.badminton.fragment.MineFragment;
+import com.zhy.autolayout.AutoLayout;
 
 
 public class MainActivity extends FragmentActivity implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
@@ -36,6 +37,8 @@ public class MainActivity extends FragmentActivity implements Toolbar.OnMenuItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AutoLayout.getInstance().auto(this, true);
+        //AutoLayout.getInstance().auto(this, true);
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         isLight = sp.getBoolean("isLight", true);
         fragmentManager = getSupportFragmentManager();
