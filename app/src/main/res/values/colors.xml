@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="custom_progress_dialog_two_bg">#03000000</color>
+    <color name="fragment_registration_head_bg">#F14E41</color>
+
+    <color name="common_head_title_color">#fff</color>
 </resources>

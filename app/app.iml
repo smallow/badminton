@@ -85,11 +85,15 @@
     <orderEntry type="jdk" jdkName="Android API 22 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="design-22.2.0" level="project" />
+    <orderEntry type="library" exported="" name="materialish-progress-1.7" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="universal-image-loader-1.9.4" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.8" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.5" level="project" />
+    <orderEntry type="module" module-name="core" exported="" />
+    <orderEntry type="module" module-name="model" exported="" />
     <orderEntry type="module" module-name="autolayout" exported="" />
   </component>
 </module>

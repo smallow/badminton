@@ -7,29 +7,25 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
-import android.widget.Toast;
-
-import com.smallow.badminton.fragment.BaoMingFragment;
 import com.smallow.badminton.fragment.MineFragment;
+import com.smallow.badminton.fragment.RegistrationFragment;
+import com.smallow.badminton.sys.base.BaseActivity;
 import com.zhy.autolayout.AutoLayout;
 
 
-public class MainActivity extends FragmentActivity implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     //#F14E41
     private long firstTime;
-    private Toolbar toolbar;
-    private boolean isLight;
+
     private SharedPreferences sp;
     private FrameLayout fl_content;
 
     private RadioGroup mainTabGroup;
     private FragmentManager fragmentManager;
-    private BaoMingFragment baoMingFragment;
+    private RegistrationFragment registrationFragment;
     private MineFragment mineFragment;
 
 
@@ -38,9 +34,7 @@ public class MainActivity extends FragmentActivity implements Toolbar.OnMenuItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AutoLayout.getInstance().auto(this, true);
-        //AutoLayout.getInstance().auto(this, true);
         sp = PreferenceManager.getDefaultSharedPreferences(this);
-        isLight = sp.getBoolean("isLight", true);
         fragmentManager = getSupportFragmentManager();
         initView();
         setTabSelection(0);
@@ -51,11 +45,11 @@ public class MainActivity extends FragmentActivity implements Toolbar.OnMenuItem
         hiddenFragments(transaction);
         switch (i) {
             case 0:
-                if (baoMingFragment == null) {
-                    baoMingFragment = new BaoMingFragment();
-                    transaction.add(R.id.fl_content, baoMingFragment);
+                if (registrationFragment == null) {
+                    registrationFragment = new RegistrationFragment();
+                    transaction.add(R.id.fl_content, registrationFragment);
                 } else {
-                    transaction.show(baoMingFragment);
+                    transaction.show(registrationFragment);
                 }
 
                 break;
@@ -72,8 +66,8 @@ public class MainActivity extends FragmentActivity implements Toolbar.OnMenuItem
     }
 
     private void hiddenFragments(FragmentTransaction transaction) {
-        if (baoMingFragment != null) {
-            transaction.hide(baoMingFragment);
+        if (registrationFragment != null) {
+            transaction.hide(registrationFragment);
         }
         if (mineFragment != null) {
             transaction.hide(mineFragment);
@@ -82,11 +76,7 @@ public class MainActivity extends FragmentActivity implements Toolbar.OnMenuItem
 
     private void initView() {
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("爱羽玩");
-        // setSupportActionBar(toolbar);
-        toolbar.inflateMenu(R.menu.menu_main);
-        toolbar.setOnMenuItemClickListener(this);
+
         fl_content = (FrameLayout) findViewById(R.id.fl_content);
         mainTabGroup = (RadioGroup) findViewById(R.id.main_tab_group);
         mainTabGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -112,7 +102,7 @@ public class MainActivity extends FragmentActivity implements Toolbar.OnMenuItem
         long secondTime = System.currentTimeMillis();
         if (secondTime - firstTime > 2000) {
             Snackbar sb = Snackbar.make(fl_content, "再按一次退出", Snackbar.LENGTH_SHORT);
-            sb.getView().setBackgroundColor(getResources().getColor(isLight ? android.R.color.holo_red_dark : android.R.color.black));
+            sb.getView().setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
             sb.show();
             firstTime = secondTime;
         } else {
@@ -121,26 +111,6 @@ public class MainActivity extends FragmentActivity implements Toolbar.OnMenuItem
 
     }
 
-    @Override
-    public boolean onMenuItemClick(MenuItem menuItem) {
-        String msg = "";
-        switch (menuItem.getItemId()) {
-            case R.id.ac_toolbar_reg:
-                msg += "注册";
-                break;
-            case R.id.ac_toolbar_jq:
-                msg += "加群";
-                break;
-            case R.id.ac_toolbar_rm:
-                msg += "入盟";
-                break;
-        }
-
-        if (!msg.equals("")) {
-            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-        }
-        return true;
-    }
 
     @Override
     public void onClick(View view) {

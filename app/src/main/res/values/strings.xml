@@ -8,4 +8,9 @@
 
     <drawable name="baoming_submit_normal">#F14E41</drawable>
     <drawable name="baoming_submit_pressed">#a44100</drawable>
+
+
+    <string name="fragment_registration_title">报名</string>
+    <string name="fragment_mine_title">我的</string>
+
 </resources>

@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.smallow.badminton.R;
-import com.smallow.badminton.bean.BaoMingPersona;
+
 import com.smallow.badminton.sys.Constant;
 import com.smallow.badminton.sys.base.BaseFragment;
 import com.smallow.badminton.sys.common.CommonBaseAdapter;
@@ -28,10 +28,10 @@ import java.util.List;
  * Created by smallow on 15/11/14.
  */
 public class BaoMingFragment extends BaseFragment implements View.OnClickListener {
-    private List<BaoMingPersona> data = new ArrayList<BaoMingPersona>();
+    //private List<BaoMingPersona> data = new ArrayList<BaoMingPersona>();
     private MyGridView gridView;
     private TextView baomingSubmit;
-    private PersonalAdapter adapter;
+    //private PersonalAdapter adapter;
 
     @Nullable
     @Override
@@ -43,8 +43,8 @@ public class BaoMingFragment extends BaseFragment implements View.OnClickListene
     protected void onInitWidgets(View rootView, Bundle savedInstanceState) {
         loadData();
         gridView = (MyGridView) findViewById(R.id.baoming_grid);
-        adapter=new PersonalAdapter(getActivity(),data,R.layout.adapter_baoming_personal_item);
-        gridView.setAdapter(adapter);
+     //   adapter=new PersonalAdapter(getActivity(),data,R.layout.adapter_baoming_personal_item);
+      //  gridView.setAdapter(adapter);
         baomingSubmit = findViewById(R.id.baoming_submit);
         baomingSubmit.setOnClickListener(this);
 
@@ -56,7 +56,7 @@ public class BaoMingFragment extends BaseFragment implements View.OnClickListene
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 dismissLoadingDialog();
-                BaoMingPersona bean1 = new BaoMingPersona();
+               /* BaoMingPersona bean1 = new BaoMingPersona();
                 bean1.setName("喜洋洋");
                 BaoMingPersona bean2 = new BaoMingPersona();
                 bean2.setName("流星");
@@ -108,7 +108,7 @@ public class BaoMingFragment extends BaseFragment implements View.OnClickListene
                 data.add(bean13);
                 data.add(bean14);
                 data.add(bean15);
-                adapter.setData(data, true);
+                adapter.setData(data, true);*/
             }
 
             @Override
@@ -130,7 +130,7 @@ public class BaoMingFragment extends BaseFragment implements View.OnClickListene
     }
 
 
-    class PersonalAdapter extends CommonBaseAdapter<BaoMingPersona> {
+    /*class PersonalAdapter extends CommonBaseAdapter<BaoMingPersona> {
         PersonalAdapter(Context context, List<BaoMingPersona> mDatas, int itemLayoutId) {
             super(context, mDatas, itemLayoutId);
         }
@@ -139,6 +139,6 @@ public class BaoMingFragment extends BaseFragment implements View.OnClickListene
         public void convert(ViewHolder viewHolder, BaoMingPersona item) {
             viewHolder.setText(R.id.baoming_personal_name, item.getName());
         }
-    }
+    }*/
 
 }

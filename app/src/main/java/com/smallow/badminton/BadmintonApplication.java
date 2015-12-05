@@ -13,15 +13,25 @@ import com.nostra13.universalimageloader.utils.StorageUtils;
 
 import java.io.File;
 
+import smallow.core.AppAction;
+import smallow.core.AppActionImpl;
+
 /**
  * Created by smallow on 2015/10/28.
  */
 public class BadmintonApplication extends Application {
 
+    private AppAction appAction;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        appAction = new AppActionImpl(this);
         initImageLoader(getApplicationContext());
+    }
+
+    public AppAction getAppAction() {
+        return appAction;
     }
 
     private void initImageLoader(Context context) {
