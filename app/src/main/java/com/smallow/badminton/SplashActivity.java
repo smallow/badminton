@@ -60,7 +60,7 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                HttpUtils.get(Constant.START, new AsyncHttpResponseHandler() {
+                HttpUtils.get(Constant.BASEURL+Constant.START, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 

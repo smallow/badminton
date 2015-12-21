@@ -9,6 +9,10 @@ import smallow.model.RegistrationPerson;
  */
 public interface Api {
 
+    public static String SERVER_URL = "http://smallow.imwork.net/";
+    public final static String APP_KEY = "ANDROID_BADMINTON";
+
+
     // 发送验证码
     public final static String SEND_SMS_CODE = "service.sendSmsCode4Register";
     // 注册
@@ -18,6 +22,9 @@ public interface Api {
 
     // 报名列表
     public final static String LIST_REGISTRATION = "member.listRegistration";
+
+    //获取当日活动信息
+    public final static String GET_TODAY_ACTIVITY_RECORD="activity/getTodayActivityRecord.do";
 
     /**
      * 发送验证码

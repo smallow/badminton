@@ -2,6 +2,7 @@ package smallow.core;
 
 import java.util.List;
 
+import smallow.model.ActivityRecord;
 import smallow.model.RegistrationPerson;
 
 /**
@@ -18,5 +19,11 @@ public interface AppAction {
     public void login(String loginName, String password, ActionCallbackListener<Void> listener);
 
     // 按分页获取报名列表
-    public void listCoupon(int currentPage, ActionCallbackListener<List<RegistrationPerson>> listener);
+    public void listRegistration(int currentPage, ActionCallbackListener<List<RegistrationPerson>> listener);
+
+    //获取当日活动信息
+    public void getTodayActivityRecord(ActionCallbackListener<ActivityRecord> listener);
+
+
+
 }

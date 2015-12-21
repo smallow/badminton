@@ -1,11 +1,9 @@
 package smallow.core;
 
 import android.content.Context;
-
 import android.os.AsyncTask;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -17,12 +15,12 @@ import org.apache.http.Header;
 import java.lang.reflect.Type;
 import java.util.List;
 
-
 import smallow.api.Api;
 import smallow.api.ApiImpl;
 import smallow.api.ApiResponse;
 import smallow.api.net.HttpEngine;
 import smallow.api.utils.HttpUtils;
+import smallow.model.ActivityRecord;
 import smallow.model.RegistrationPerson;
 
 /**
@@ -90,7 +88,7 @@ public class AppActionImpl implements AppAction {
     }
 
     @Override
-    public void listCoupon(final int currentPage, final ActionCallbackListener<List<RegistrationPerson>> listener) {
+    public void listRegistration(final int currentPage, final ActionCallbackListener<List<RegistrationPerson>> listener) {
         /*new AsyncTask<Void,Void,ApiResponse<List<RegistrationPerson>>>(){
             @Override
             protected ApiResponse<List<RegistrationPerson>> doInBackground(Void... voids) {
@@ -112,8 +110,6 @@ public class AppActionImpl implements AppAction {
         params.put("id", "1");
         params.put("name", "张三");
         HttpUtils.get(HttpEngine.SERVER_URL, params, new AsyncHttpResponseHandler() {
-
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 final String result = new String(responseBody);
@@ -131,6 +127,33 @@ public class AppActionImpl implements AppAction {
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 ApiResponse<List<RegistrationPerson>> apiResponse = new ApiResponse<List<RegistrationPerson>>("1", "失败");
+                listener.onFailure(apiResponse.getEvent(), apiResponse.getMsg());
+            }
+        });
+    }
+
+    @Override
+    public void getTodayActivityRecord(final ActionCallbackListener<ActivityRecord> listener) {
+        RequestParams params = new RequestParams();
+        params.put("appKey", Api.APP_KEY);
+        HttpUtils.get(Api.SERVER_URL + Api.GET_TODAY_ACTIVITY_RECORD, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                final String json = new String(responseBody);
+                Gson gson = new Gson();
+                Type type = new TypeToken<ApiResponse<ActivityRecord>>() {
+                }.getType();
+                ApiResponse<ActivityRecord> apiResponse = gson.fromJson(json, type);
+                if (apiResponse.isSuccess()) {
+                    listener.onSuccess(apiResponse.getObj());
+                } else {
+                    listener.onFailure(apiResponse.getEvent(), apiResponse.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                ApiResponse<ActivityRecord> apiResponse = new ApiResponse<ActivityRecord>("1", "失败");
                 listener.onFailure(apiResponse.getEvent(), apiResponse.getMsg());
             }
         });

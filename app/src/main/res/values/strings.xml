@@ -13,4 +13,18 @@
     <string name="fragment_registration_title">报名</string>
     <string name="fragment_mine_title">我的</string>
 
+
+
+    <string-array name="fake_tweets">
+        <item>George</item>
+        <item>Zubin</item>
+        <item>Carlos</item>
+        <item>Frank</item>
+        <item>Charles</item>
+        <item>Simon</item>
+        <item>Fezra</item>
+        <item>Henry</item>
+        <item>Schuster</item>
+
+    </string-array>
 </resources>
