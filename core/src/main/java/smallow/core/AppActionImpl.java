@@ -153,7 +153,7 @@ public class AppActionImpl implements AppAction {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                ApiResponse<ActivityRecord> apiResponse = new ApiResponse<ActivityRecord>("1", "失败");
+                ApiResponse<ActivityRecord> apiResponse = new ApiResponse<ActivityRecord>("1", "error");
                 listener.onFailure(apiResponse.getEvent(), apiResponse.getMsg());
             }
         });

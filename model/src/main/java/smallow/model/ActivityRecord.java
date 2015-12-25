@@ -35,6 +35,9 @@ public class ActivityRecord implements Serializable {
 
     private List<RegistrationPerson> persons;//报名人
 
+    private String date_week;//星期几
+    private String venue;//球馆
+
 
     public Integer getId() {
         return id;
@@ -138,5 +141,21 @@ public class ActivityRecord implements Serializable {
 
     public void setPersons(List<RegistrationPerson> persons) {
         this.persons = persons;
+    }
+
+    public String getDate_week() {
+        return date_week;
+    }
+
+    public void setDate_week(String date_week) {
+        this.date_week = date_week;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
     }
 }

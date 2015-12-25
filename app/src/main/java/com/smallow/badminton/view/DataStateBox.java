@@ -138,6 +138,7 @@ public class DataStateBox extends FrameLayout {
         }
     }
 
+    private DataStateBoxListener mDataSateBoxListener;
     private OnClickListener innerOnClickListener = new OnClickListener() {
 
         @Override
@@ -147,6 +148,11 @@ public class DataStateBox extends FrameLayout {
                 case INIT_LOADING:
                     return;
                 case EMPTY_DATA:
+                    if (mDataSateBoxListener != null) {
+                        mDataSateBoxListener.onReqeustReloadData(curState,
+                                DataStateBox.this);
+                    }
+                    break;
                 case LOAD_ERROR:
                     if (mDataSateBoxListener != null) {
                         mDataSateBoxListener.onReqeustReloadData(curState,
@@ -156,7 +162,6 @@ public class DataStateBox extends FrameLayout {
             }
         }
     };
-    private DataStateBoxListener mDataSateBoxListener;
 
     public void setDataSateBoxListener(DataStateBoxListener l) {
         this.mDataSateBoxListener = l;

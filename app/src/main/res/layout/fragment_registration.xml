@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/include_common_title" />
+    <include
+        android:id="@+id/topBar"
+        layout="@layout/include_common_title" />
+
+
 
     <com.smallow.badminton.view.DataStateBox
         android:id="@+id/data_state_box"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topBar">
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/activity_main_swipe_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -48,9 +55,18 @@
                             android:text="(2015-11-15 周六)"
                             android:textColor="#F14E41"
                             android:textSize="16sp" />
+                        <com.getbase.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/pink_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            fab:fab_colorNormal="@color/pink"
+                            fab:fab_colorPressed="@color/pink_pressed"
+                            fab:fab_icon="@mipmap/ic_fab_star" />
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/layout_fragment_registration_today_record"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -82,7 +98,7 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_toRightOf="@+id/baoming_hdsj"
                                 android:gravity="center"
-                                android:text="晚6点-8点"
+                                android:text=""
                                 android:textColor="#F14E41"
                                 android:textSize="14sp" />
                         </RelativeLayout>
@@ -111,7 +127,7 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_toRightOf="@+id/baoming_hddd"
                                 android:gravity="center"
-                                android:text="沙口路千羽羽毛球馆"
+                                android:text=""
                                 android:textColor="#F14E41"
                                 android:textSize="14sp" />
                         </RelativeLayout>
@@ -140,7 +156,7 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_toRightOf="@+id/baoming_fzr"
                                 android:gravity="center"
-                                android:text="喜羊羊"
+                                android:text=""
                                 android:textColor="#F14E41"
                                 android:textSize="14sp" />
                         </RelativeLayout>
@@ -169,11 +185,61 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_toRightOf="@+id/baoming_fzrdh"
                                 android:gravity="center"
-                                android:text="13603456869"
+                                android:text=""
                                 android:textColor="#F14E41"
                                 android:textSize="14sp" />
                         </RelativeLayout>
 
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp">
+
+                            <TextView
+                                android:id="@+id/baoming_hdzt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:gravity="center"
+                                android:text="活动状态:"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tv_fragment_registration_today_activity_status"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="5dp"
+                                android:layout_toRightOf="@+id/baoming_hdzt"
+                                android:gravity="center"
+                                android:text=""
+                                android:textColor="#F14E41"
+                                android:textSize="14sp" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_fragment_registration_today_record_no_activity_messge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/default_shape_corner"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="今日无活动"
+                            android:textColor="#F14E41"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -203,6 +269,7 @@
                             android:stretchMode="columnWidth" />
                     </LinearLayout>
 
+
                 </LinearLayout>
 
 
@@ -211,4 +278,4 @@
 
         </android.support.v4.widget.SwipeRefreshLayout>
     </com.smallow.badminton.view.DataStateBox>
-</LinearLayout>
+</RelativeLayout>

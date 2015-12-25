@@ -3,6 +3,7 @@ package smallow.api.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -16,6 +17,7 @@ import com.loopj.android.http.ResponseHandlerInterface;
  */
 public class HttpUtils {
     private static AsyncHttpClient client = new AsyncHttpClient();
+    private static String tag = "HttpUtils";
 
     static {
         client.setTimeout(20000);   //设置链接超时，如果不设置，默认为10s
@@ -28,6 +30,7 @@ public class HttpUtils {
 
     public static void get(String urlString, RequestParams params, AsyncHttpResponseHandler res)   //url里面带参数
     {
+        Log.d(tag, "requestUrl:" + urlString + " params:" + params.toString());
         client.get(urlString, params, res);
     }
 

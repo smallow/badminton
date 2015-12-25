@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,13 +34,14 @@ import smallow.model.RegistrationPerson;
 /**
  * Created by smallow on 15/12/2.
  */
-public class RegistrationFragment extends BaseFragment implements View.OnClickListener {
+public class RegistrationFragment extends BaseFragment implements View.OnClickListener,DataStateBox.DataStateBoxListener {
     private DataStateBox mStateView;
     //MyListView mListView;
     SwipeRefreshLayout mSwipeRefreshLayout;
     MyGridView myGridView;
     RegistrationPersonAdapter mAdapter;
-    private TextView mDate,mAddress,mChargePerson,mChargePersonPhone,mTime;
+    private TextView mDate,mAddress,mChargePerson,mChargePersonPhone,mTime,mStatus;
+    private LinearLayout activityRecordLayout,noActivityMessageLayout;
 
 
     private List<RegistrationPerson> persons = new ArrayList<>();
@@ -60,6 +62,7 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
 
     private void initView() {
         mStateView = findViewById(R.id.data_state_box);
+        mStateView.setDataSateBoxListener(this);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_main_swipe_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#F14E41"));
        /* mListView = findViewById(R.id.activity_main_listview);
@@ -72,10 +75,11 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
         mDate=findViewById(R.id.tv_fragment_registration_today_activity_date);
         mTime=findViewById(R.id.tv_fragment_registration_today_activity_time);
         mAddress=findViewById(R.id.tv_fragment_registration_today_activity_address);
-        mAddress.setText("农业路沙口路千羽羽毛球馆1");
         mChargePerson=findViewById(R.id.tv_fragment_registration_today_activity_charge_person);
         mChargePersonPhone=findViewById(R.id.tv_fragment_registration_today_activity_charge_person_phone);
-
+        activityRecordLayout=findViewById(R.id.layout_fragment_registration_today_record);
+        noActivityMessageLayout=findViewById(R.id.layout_fragment_registration_today_record_no_activity_messge);
+        mStatus=findViewById(R.id.tv_fragment_registration_today_activity_status);
 
 
     }
@@ -105,7 +109,11 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
                     persons = data.getPersons();
                     mAdapter.setData(persons, true);
                     mChargePerson.setText(data.getChargePerson());
-                    mChargePersonPhone.setText(data.getId()+"");
+                    mChargePersonPhone.setText(data.getContactNumber());
+                    mDate.setText(data.getDate()+ " "+data.getDate_week());
+                    mTime.setText(data.getStartTime()+" -- "+data.getEndTime());
+                    mAddress.setText(data.getVenue());
+                    mStatus.setText(data.getStatus());
                 } else {
                     mStateView.setState(DataStateBox.State.EMPTY_DATA);
                 }
@@ -113,7 +121,14 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                mStateView.setState(DataStateBox.State.LOAD_ERROR);
+                if(message!=null && message.equals("empty data")){
+                   // mStateView.setState(DataStateBox.State.EMPTY_DATA);
+                    mStateView.setState(DataStateBox.State.HIDE);
+                    activityRecordLayout.setVisibility(View.GONE);
+                    noActivityMessageLayout.setVisibility(View.VISIBLE);
+                }else{
+                    mStateView.setState(DataStateBox.State.LOAD_ERROR);
+                }
             }
         });
     }
@@ -125,6 +140,11 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onReqeustReloadData(DataStateBox.State curState, DataStateBox v) {
+        initData();
     }
 
     class RegistrationPersonAdapter extends CommonBaseAdapter<RegistrationPerson> {

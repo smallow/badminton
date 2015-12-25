@@ -27,6 +27,7 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'com.loopj.android:android-async-http:1.4.8'
     compile 'com.pnikosis:materialish-progress:1.7'
+    compile 'com.getbase:floatingactionbutton:1.10.1'
     compile project(':autolayout')
     compile project(':model')
     compile project(':core')
