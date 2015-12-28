@@ -10,7 +10,7 @@ import smallow.model.RegistrationPerson;
 public interface Api {
 
     //public static String SERVER_URL = "http://smallow.imwork.net/";
-    public static String SERVER_URL = "http://192.168.3.127:8080/";
+    public static String SERVER_URL = "http://192.168.1.102:8080/";
     public final static String APP_KEY = "ANDROID_BADMINTON";
 
 
