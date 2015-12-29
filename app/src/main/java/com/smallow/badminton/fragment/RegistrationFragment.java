@@ -34,14 +34,14 @@ import smallow.model.RegistrationPerson;
 /**
  * Created by smallow on 15/12/2.
  */
-public class RegistrationFragment extends BaseFragment implements View.OnClickListener,DataStateBox.DataStateBoxListener {
+public class RegistrationFragment extends BaseFragment implements View.OnClickListener, DataStateBox.DataStateBoxListener {
     private DataStateBox mStateView;
     //MyListView mListView;
     SwipeRefreshLayout mSwipeRefreshLayout;
     MyGridView myGridView;
     RegistrationPersonAdapter mAdapter;
-    private TextView mDate,mAddress,mChargePerson,mChargePersonPhone,mTime,mStatus;
-    private LinearLayout activityRecordLayout,noActivityMessageLayout;
+    private TextView mDate, mAddress, mChargePerson, mChargePersonPhone, mTime, mStatus, mRefresh, mSubmit;
+    private LinearLayout activityRecordLayout, noActivityMessageLayout;
 
 
     private List<RegistrationPerson> persons = new ArrayList<>();
@@ -72,14 +72,18 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
         myGridView = findViewById(R.id.grid_fragment_registration_today_activity_members);
         mAdapter = new RegistrationPersonAdapter(getActivity(), persons, R.layout.adapter_baoming_personal_item);
         myGridView.setAdapter(mAdapter);
-        mDate=findViewById(R.id.tv_fragment_registration_today_activity_date);
-        mTime=findViewById(R.id.tv_fragment_registration_today_activity_time);
-        mAddress=findViewById(R.id.tv_fragment_registration_today_activity_address);
-        mChargePerson=findViewById(R.id.tv_fragment_registration_today_activity_charge_person);
-        mChargePersonPhone=findViewById(R.id.tv_fragment_registration_today_activity_charge_person_phone);
-        activityRecordLayout=findViewById(R.id.layout_fragment_registration_today_record);
-        noActivityMessageLayout=findViewById(R.id.layout_fragment_registration_today_record_no_activity_messge);
-        mStatus=findViewById(R.id.tv_fragment_registration_today_activity_status);
+        mDate = findViewById(R.id.tv_fragment_registration_today_activity_date);
+        mTime = findViewById(R.id.tv_fragment_registration_today_activity_time);
+        mAddress = findViewById(R.id.tv_fragment_registration_today_activity_address);
+        mChargePerson = findViewById(R.id.tv_fragment_registration_today_activity_charge_person);
+        mChargePersonPhone = findViewById(R.id.tv_fragment_registration_today_activity_charge_person_phone);
+        activityRecordLayout = findViewById(R.id.layout_fragment_registration_today_record);
+        noActivityMessageLayout = findViewById(R.id.layout_fragment_registration_today_record_no_activity_messge);
+        mStatus = findViewById(R.id.tv_fragment_registration_today_activity_status);
+        mRefresh = findViewById(R.id.tv_fragment_registration_refresh);
+        mSubmit = findViewById(R.id.tv_fragment_registration_submit);
+        mRefresh.setOnClickListener(this);
+        mSubmit.setOnClickListener(this);
 
 
     }
@@ -110,8 +114,8 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
                     mAdapter.setData(persons, true);
                     mChargePerson.setText(data.getChargePerson());
                     mChargePersonPhone.setText(data.getContactNumber());
-                    mDate.setText(data.getDate()+ " "+data.getDate_week());
-                    mTime.setText(data.getStartTime()+" -- "+data.getEndTime());
+                    mDate.setText(data.getDate() + " " + data.getDate_week());
+                    mTime.setText(data.getStartTime() + " -- " + data.getEndTime());
                     mAddress.setText(data.getVenue());
                     mStatus.setText(data.getStatus());
                 } else {
@@ -121,12 +125,12 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                if(message!=null && message.equals("empty data")){
-                   // mStateView.setState(DataStateBox.State.EMPTY_DATA);
+                if (message != null && message.equals("empty data")) {
+                    // mStateView.setState(DataStateBox.State.EMPTY_DATA);
                     mStateView.setState(DataStateBox.State.HIDE);
                     activityRecordLayout.setVisibility(View.GONE);
                     noActivityMessageLayout.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     mStateView.setState(DataStateBox.State.LOAD_ERROR);
                 }
             }
@@ -136,10 +140,22 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-
+            case R.id.tv_fragment_registration_refresh:
+                initData();
+                break;
+            case R.id.tv_fragment_registration_submit:
+                submit();
+                break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 报名参加活动
+     */
+    private void submit() {
+        showLoadingDialog("正在提交数据,请稍后...");
     }
 
     @Override

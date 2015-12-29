@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -40,6 +40,7 @@
                         android:padding="5dp">
 
                         <TextView
+                            android:id="@+id/tv_jrhd"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -50,20 +51,42 @@
                             android:id="@+id/tv_fragment_registration_today_activity_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/tv_jrhd"
                             android:layout_marginLeft="10dp"
+                            android:layout_centerVertical="true"
                             android:gravity="center"
-                            android:text="(2015-11-15 周六)"
+                            android:text=""
                             android:textColor="#F14E41"
-                            android:textSize="16sp" />
-                        <com.getbase.floatingactionbutton.FloatingActionButton
+                            android:textSize="14sp" />
+                        <!--<com.getbase.floatingactionbutton.FloatingActionButton
                             android:id="@+id/pink_icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
                             fab:fab_colorNormal="@color/pink"
                             fab:fab_colorPressed="@color/pink_pressed"
-                            fab:fab_icon="@mipmap/ic_fab_star" />
-                    </LinearLayout>
+                            fab:fab_icon="@mipmap/ic_fab_star" />-->
+                        <TextView
+                            android:id="@+id/tv_fragment_registration_submit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="报名"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:textSize="16sp"
+                            android:textColor="#00CD00"
+                            />
+                        <TextView
+                            android:id="@+id/tv_fragment_registration_refresh"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="刷新"
+                            android:layout_toLeftOf="@+id/tv_fragment_registration_submit"
+                            android:layout_marginRight="10dp"
+                            android:textSize="16sp"
+                            android:textColor="#FFA500"
+                            />
+                    </RelativeLayout>
 
                     <LinearLayout
                         android:id="@+id/layout_fragment_registration_today_record"

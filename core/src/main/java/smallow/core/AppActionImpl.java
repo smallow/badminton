@@ -158,4 +158,30 @@ public class AppActionImpl implements AppAction {
             }
         });
     }
+
+    @Override
+    public void registrateTodayActivity(String loginId,final ActionCallbackListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("appKey", Api.APP_KEY);
+        params.put("loginId",loginId);
+        HttpUtils.get(Api.SERVER_URL+Api.POST_REGISTRATE_TODAY_ACTIVITY, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                final String json = new String(responseBody);
+                Gson gson = new Gson();
+                Type type = new TypeToken<ApiResponse<Void>>(){}.getType();
+                ApiResponse<Void> apiResponse = gson.fromJson(json, type);
+                if (apiResponse.isSuccess()) {
+                    listener.onSuccess(apiResponse.getObj());
+                } else {
+                    listener.onFailure(apiResponse.getEvent(), apiResponse.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+    }
 }

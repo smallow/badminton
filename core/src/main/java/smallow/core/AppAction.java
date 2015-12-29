@@ -24,6 +24,9 @@ public interface AppAction {
     //获取当日活动信息
     public void getTodayActivityRecord(ActionCallbackListener<ActivityRecord> listener);
 
+    //报名今日活动
+    public void registrateTodayActivity(String loginName,ActionCallbackListener listener);
+
 
 
 }

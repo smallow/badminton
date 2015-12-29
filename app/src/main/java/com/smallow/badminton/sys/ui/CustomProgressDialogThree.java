@@ -30,7 +30,7 @@ public class CustomProgressDialogThree extends Dialog {
     private void init(){
         setContentView(R.layout.custom_progress_dialog_three_layout);
         title= (TextView)findViewById(R.id.id_dialog_loading_msg);
-        title.setText(mMsg);
+        //title.setText(mMsg);
     }
 
 }

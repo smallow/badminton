@@ -10,7 +10,7 @@ import smallow.model.RegistrationPerson;
 public interface Api {
 
     //public static String SERVER_URL = "http://smallow.imwork.net/";
-    public static String SERVER_URL = "http://192.168.1.102:8080/";
+    public static String SERVER_URL = "http://192.168.110.100:8080/";
     public final static String APP_KEY = "ANDROID_BADMINTON";
 
 
@@ -26,6 +26,8 @@ public interface Api {
 
     //获取当日活动信息
     public final static String GET_TODAY_ACTIVITY_RECORD="activity/getTodayActivityRecord.do";
+
+    public final static String POST_REGISTRATE_TODAY_ACTIVITY="activity/registrateTodayActivity.do";//报名参加今日活动
 
     /**
      * 发送验证码
