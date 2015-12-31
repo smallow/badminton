@@ -1,6 +1,7 @@
 package com.smallow.badminton;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.animation.Animation;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.BinaryHttpResponseHandler;
+import com.smallow.badminton.activity.LoginActivity;
 import com.smallow.badminton.sys.Constant;
 import com.smallow.badminton.sys.base.BaseActivity;
 import com.smallow.badminton.sys.utils.HttpUtils;
@@ -27,12 +29,14 @@ import java.io.IOException;
 public class SplashActivity extends BaseActivity {
 
     private ImageView iv_start;
+    private SharedPreferences sharedPreferences;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_splash);
+        sharedPreferences=getSharedPreferences("badminton",MODE_PRIVATE);
         iv_start = (ImageView) findViewById(R.id.iv_start);
         initImage();
     }
@@ -107,11 +111,22 @@ public class SplashActivity extends BaseActivity {
 
 
     private void startActivity() {
-        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-        startActivity(intent);
-        overridePendingTransition(android.R.anim.fade_in,
-                android.R.anim.fade_out);
-        finish();
+        boolean isFirstLogin=sharedPreferences.getBoolean("firstLogin",true);
+        if(!isFirstLogin){
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in,
+                    android.R.anim.fade_out);
+            finish();
+        }else{
+            sharedPreferences.edit().putBoolean("firstLogin",false).commit();
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in,
+                    android.R.anim.fade_out);
+            finish();
+        }
+
     }
 
     public void saveImage(File file, byte[] bytes) {

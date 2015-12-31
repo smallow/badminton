@@ -1,24 +1,12 @@
-package com.smallow.badminton.sys.utils;
-
-import android.view.View;
+package smallow.core;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by smallow on 15/12/5.
+ * Created by smallow on 15/12/31.
  */
-public class CommonUtils {
-
-    public static void checkVisibility(View v, int visibility) {
-        if (v == null) {
-            return;
-        }
-        if (v.getVisibility() == visibility) {
-            return;
-        }
-        v.setVisibility(visibility);
-    }
+public class MD5 {
 
     public static String crypt(String str) {
         if (str == null || str.length() == 0) {

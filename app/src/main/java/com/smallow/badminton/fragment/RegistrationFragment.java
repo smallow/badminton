@@ -1,6 +1,7 @@
 package com.smallow.badminton.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.smallow.badminton.BadmintonApplication;
 import com.smallow.badminton.R;
@@ -22,6 +24,7 @@ import com.smallow.badminton.sys.common.CommonBaseAdapter;
 import com.smallow.badminton.sys.common.ViewHolder;
 import com.smallow.badminton.sys.ui.MyGridView;
 import com.smallow.badminton.sys.ui.MyListView;
+import com.smallow.badminton.sys.utils.CommonUtils;
 import com.smallow.badminton.view.DataStateBox;
 
 import java.util.ArrayList;
@@ -45,7 +48,8 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
 
 
     private List<RegistrationPerson> persons = new ArrayList<>();
-
+    private Integer groupId,loginUserId,activityRecordId;
+    private SharedPreferences sharedPreferences;
 
     @Nullable
     @Override
@@ -56,6 +60,9 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
     @Override
     protected void onInitWidgets(View rootView, Bundle savedInstanceState) {
         initHeadView(false, getResources().getString(R.string.fragment_registration_title));
+        sharedPreferences=getActivity().getSharedPreferences("badminton", Context.MODE_PRIVATE);
+        groupId=sharedPreferences.getInt("groupId",0);
+        loginUserId =sharedPreferences.getInt("loginUserId",0);
         initView();
         initData();
     }
@@ -105,7 +112,7 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
 
     private void initData() {
         mStateView.setState(DataStateBox.State.INIT_LOADING);
-        ((BadmintonApplication) getActivity().getApplication()).getAppAction().getTodayActivityRecord(new ActionCallbackListener<ActivityRecord>() {
+        ((BadmintonApplication) getActivity().getApplication()).getAppAction().getTodayActivityRecord(groupId,new ActionCallbackListener<ActivityRecord>() {
             @Override
             public void onSuccess(ActivityRecord data) {
                 if (data != null) {
@@ -118,6 +125,7 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
                     mTime.setText(data.getStartTime() + " -- " + data.getEndTime());
                     mAddress.setText(data.getVenue());
                     mStatus.setText(data.getStatus());
+                    activityRecordId=data.getId();
                 } else {
                     mStateView.setState(DataStateBox.State.EMPTY_DATA);
                 }
@@ -156,6 +164,24 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
      */
     private void submit() {
         showLoadingDialog("正在提交数据,请稍后...");
+        ((BadmintonApplication) getActivity().getApplication()).getAppAction().registrateTodayActivity(loginUserId,activityRecordId,groupId,new ActionCallbackListener<String>(){
+            @Override
+            public void onSuccess(String data) {
+                dismissLoadingDialog();
+                if(data!=null && data.equals("success")){
+                    Toast.makeText(getActivity(),"报名成功!",Toast.LENGTH_SHORT).show();
+                    initData();
+                }else{
+                    Toast.makeText(getActivity(),"报名未成功!",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                dismissLoadingDialog();
+                Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

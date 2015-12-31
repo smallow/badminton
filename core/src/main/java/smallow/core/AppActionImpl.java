@@ -21,6 +21,7 @@ import smallow.api.ApiResponse;
 import smallow.api.net.HttpEngine;
 import smallow.api.utils.HttpUtils;
 import smallow.model.ActivityRecord;
+import smallow.model.Member;
 import smallow.model.RegistrationPerson;
 
 /**
@@ -51,7 +52,7 @@ public class AppActionImpl implements AppAction {
     }
 
     @Override
-    public void login(final String loginName, final String password, final ActionCallbackListener<Void> listener) {
+    public void login(final String loginName, final String password, final ActionCallbackListener<Member> listener) {
         // 参数为空检查
         if (TextUtils.isEmpty(loginName)) {
             if (listener != null) {
@@ -66,7 +67,7 @@ public class AppActionImpl implements AppAction {
             return;
         }
         // 请求Api
-        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+        /*new AsyncTask<Void, Void, ApiResponse<Void>>() {
             @Override
             protected ApiResponse<Void> doInBackground(Void... voids) {
                 TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
@@ -84,7 +85,32 @@ public class AppActionImpl implements AppAction {
                     }
                 }
             }
-        }.execute();
+        }.execute();*/
+
+        RequestParams params = new RequestParams();
+        params.put("mobile", loginName);
+        params.put("pwd",MD5.crypt(password));
+        params.put("appKey", Api.APP_KEY);
+        HttpUtils.get(Api.SERVER_URL+Api.APP_LOGIN, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                final String result = new String(responseBody);
+                Gson gson = new Gson();
+                Type type = new TypeToken<ApiResponse<Member>>(){}.getType();
+                ApiResponse<Member> apiResponse=gson.fromJson(result,type);
+                if(apiResponse.isSuccess()){
+                    listener.onSuccess(apiResponse.getObj());
+                }else{
+                    listener.onFailure(apiResponse.getEvent(),apiResponse.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                listener.onFailure(new String(responseBody),error.getMessage());
+            }
+        });
     }
 
     @Override
@@ -133,9 +159,10 @@ public class AppActionImpl implements AppAction {
     }
 
     @Override
-    public void getTodayActivityRecord(final ActionCallbackListener<ActivityRecord> listener) {
+    public void getTodayActivityRecord(Integer groupId,final ActionCallbackListener<ActivityRecord> listener) {
         RequestParams params = new RequestParams();
         params.put("appKey", Api.APP_KEY);
+        params.put("groupId", groupId);
         HttpUtils.get(Api.SERVER_URL + Api.GET_TODAY_ACTIVITY_RECORD, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -160,10 +187,13 @@ public class AppActionImpl implements AppAction {
     }
 
     @Override
-    public void registrateTodayActivity(String loginId,final ActionCallbackListener listener) {
+    public void registrateTodayActivity(Integer memberId,Integer activityRecordId,Integer groupId, final ActionCallbackListener listener) {
         RequestParams params = new RequestParams();
         params.put("appKey", Api.APP_KEY);
-        params.put("loginId",loginId);
+        params.put("memberId",memberId);
+        params.put("activityRecordId",activityRecordId);
+        params.put("groupId",groupId);
+
         HttpUtils.get(Api.SERVER_URL+Api.POST_REGISTRATE_TODAY_ACTIVITY, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -172,7 +202,7 @@ public class AppActionImpl implements AppAction {
                 Type type = new TypeToken<ApiResponse<Void>>(){}.getType();
                 ApiResponse<Void> apiResponse = gson.fromJson(json, type);
                 if (apiResponse.isSuccess()) {
-                    listener.onSuccess(apiResponse.getObj());
+                    listener.onSuccess(apiResponse.getMsg());
                 } else {
                     listener.onFailure(apiResponse.getEvent(), apiResponse.getMsg());
                 }
@@ -180,7 +210,7 @@ public class AppActionImpl implements AppAction {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
+                listener.onFailure(new String(responseBody), error.getMessage());
             }
         });
     }

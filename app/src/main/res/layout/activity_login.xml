@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F14E41"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tv_aty_login_fk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="访客浏览"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="登陆"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_aty_login_regist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="注册"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/login_phone_and_pwd_bottom_line_style"
+        android:paddingLeft="20dp"
+
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/tv_aty_login_sjh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="手机号"
+            android:textColor="#F14E41"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/etv_aty_login_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/tv_aty_login_sjh"
+            android:background="@null"
+            android:hint="请输入手机号"
+            android:textColor="#ABABAB"
+            android:textColorHint="#dadada" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/login_phone_and_pwd_bottom_line_style"
+        android:paddingLeft="38dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/tv_aty_login_mm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="密码"
+            android:textColor="#F14E41"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/etv_aty_login_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/tv_aty_login_mm"
+            android:background="@null"
+            android:hint="请输入密码"
+            android:password="true"
+            android:textColor="#ABABAB"
+            android:textColorHint="#dadada" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_aty_login_submit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/login_submit_selector"
+        android:gravity="center"
+        android:text="登陆"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#F14E41"
+        android:text="忘记密码?"
+        android:textSize="14sp"
+        android:layout_margin="15dp"
+        android:layout_gravity="right"
+        />
+</LinearLayout>
