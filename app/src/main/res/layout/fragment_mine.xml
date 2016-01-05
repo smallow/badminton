@@ -2,21 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <include layout="@layout/include_common_title" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
-        >
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
-
+            android:orientation="vertical">
 
 
             <!-- 个人信息 -->
@@ -25,13 +23,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@drawable/default_bottom_border_line"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:padding="8dp" >
+                    android:padding="8dp">
 
                     <ImageView
                         android:id="@+id/fragment_mine_touxiang"
@@ -46,9 +44,8 @@
                     android:layout_weight="3"
                     android:paddingBottom="3dp"
                     android:paddingLeft="11dp"
-                    android:paddingTop="28dp"
                     android:paddingRight="5dp"
-                    >
+                    android:paddingTop="28dp">
 
                     <TextView
                         android:id="@+id/fragment_mine_name"
@@ -72,8 +69,8 @@
                         android:id="@+id/mine_jiantou"
                         android:layout_width="20dp"
                         android:layout_height="15dp"
-                        android:layout_centerInParent="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
                         android:src="@mipmap/default_right_jiantou" />
                 </RelativeLayout>
             </LinearLayout>
@@ -86,8 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="17dp"
                 android:background="@drawable/default_bottom_border_line_for_divider"
-                android:orientation="vertical" >
-            </LinearLayout>
+                android:orientation="vertical"></LinearLayout>
 
             <!-- 我的帐号-->
 
@@ -97,13 +93,14 @@
                 android:background="#ffffff"
                 android:orientation="horizontal"
                 android:paddingLeft="11dp"
-                android:paddingTop="5dp" >
+                android:paddingTop="5dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -117,9 +114,8 @@
                     android:layout_weight="8"
                     android:background="@drawable/default_bottom_border_line"
                     android:paddingBottom="3dp"
-                    android:paddingTop="13dp"
                     android:paddingRight="5dp"
-                    >
+                    android:paddingTop="13dp">
 
                     <TextView
                         android:id="@+id/mine_tv_zhanghao"
@@ -128,6 +124,7 @@
                         android:text="我的活动记录"
                         android:textColor="#313131"
                         android:textSize="16sp" />
+
                     <ImageView
                         android:id="@+id/imageView1"
                         android:layout_width="20dp"
@@ -145,13 +142,13 @@
                 android:background="@drawable/default_bottom_border_line"
                 android:orientation="horizontal"
                 android:paddingLeft="11dp"
-                android:paddingTop="5dp" >
+                android:paddingTop="5dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -165,9 +162,8 @@
                     android:layout_marginLeft="15dp"
                     android:layout_weight="8"
                     android:paddingBottom="3dp"
-                    android:paddingTop="13dp"
                     android:paddingRight="5dp"
-                    >
+                    android:paddingTop="13dp">
 
                     <TextView
                         android:id="@+id/mine_tv_xiaoxi"
@@ -176,6 +172,7 @@
                         android:text="我的缴费记录"
                         android:textColor="#313131"
                         android:textSize="16sp" />
+
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="15dp"
@@ -193,12 +190,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="17dp"
                 android:background="@drawable/default_bottom_border_line_for_divider"
-                android:orientation="vertical" >
-            </LinearLayout>
-
-
-
-
+                android:orientation="vertical"></LinearLayout>
 
 
             <!-- 设置 -->
@@ -208,13 +200,14 @@
                 android:background="@drawable/default_bottom_border_line"
                 android:orientation="horizontal"
                 android:paddingLeft="11dp"
-                android:paddingTop="5dp" >
+                android:paddingTop="5dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -229,9 +222,8 @@
                     android:layout_weight="8"
 
                     android:paddingBottom="3dp"
-                    android:paddingTop="13dp"
                     android:paddingRight="5dp"
-                    >
+                    android:paddingTop="13dp">
 
                     <TextView
                         android:id="@+id/mine_tv_shezhi"
@@ -240,6 +232,7 @@
                         android:text="设置"
                         android:textColor="#313131"
                         android:textSize="16sp" />
+
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="15dp"
@@ -249,9 +242,33 @@
 
                 </RelativeLayout>
             </LinearLayout>
+            <!-- 页面分割线 -->
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="17dp"
+                android:background="@drawable/default_bottom_border_line_for_divider"
+                android:orientation="vertical"></LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_fragment_mine_quit"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:background="@drawable/default_bottom_border_line">
+
+
+                <TextView
+                    android:id="@+id/tv_fragment_mine_quit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="退出登陆"
+                    android:textSize="16sp"
+                    android:textColor="#F14E41" />
+            </RelativeLayout>
 
             <!-- 设置 结束-->
+
 
         </LinearLayout>
     </ScrollView>

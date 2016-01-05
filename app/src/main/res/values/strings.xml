@@ -27,4 +27,12 @@
         <item>Schuster</item>
 
     </string-array>
+
+    <string-array name="charge_person">
+        <item>喜羊羊</item>
+        <item>流星</item>
+        <item>爱在阳光下</item>
+        <item>小彬</item>
+        <item>凉白开</item>
+    </string-array>
 </resources>

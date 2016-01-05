@@ -20,4 +20,15 @@
         android:layout_centerInParent="true"
         android:textColor="@color/common_head_title_color"
         android:textSize="@dimen/common_head_title_size" />
+
+    <TextView
+        android:id="@+id/common_head_nav_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/common_head_title_color"
+        android:textSize="16sp"
+        />
 </RelativeLayout>

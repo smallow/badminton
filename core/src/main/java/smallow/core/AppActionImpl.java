@@ -89,7 +89,7 @@ public class AppActionImpl implements AppAction {
 
         RequestParams params = new RequestParams();
         params.put("mobile", loginName);
-        params.put("pwd",MD5.crypt(password));
+        params.put("pwd",password);
         params.put("appKey", Api.APP_KEY);
         HttpUtils.get(Api.SERVER_URL+Api.APP_LOGIN, params, new AsyncHttpResponseHandler() {
             @Override
@@ -108,7 +108,12 @@ public class AppActionImpl implements AppAction {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                listener.onFailure(new String(responseBody),error.getMessage());
+                if(responseBody==null){
+                    listener.onFailure("服务端无响应","服务端无响应");
+                }else{
+                    listener.onFailure(new String(responseBody),error.getMessage());
+                }
+
             }
         });
     }
@@ -201,6 +206,41 @@ public class AppActionImpl implements AppAction {
                 Gson gson = new Gson();
                 Type type = new TypeToken<ApiResponse<Void>>(){}.getType();
                 ApiResponse<Void> apiResponse = gson.fromJson(json, type);
+                if (apiResponse.isSuccess()) {
+                    listener.onSuccess(apiResponse.getMsg());
+                } else {
+                    listener.onFailure(apiResponse.getEvent(), apiResponse.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                listener.onFailure(new String(responseBody), error.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void createActivityRecord(String date, String chargePerson, String playFieldNum, String startTime, String endTime, String venue,Integer groupId,String contactNumber,final ActionCallbackListener listener) {
+        RequestParams params = new RequestParams();
+        params.put("appKey", Api.APP_KEY);
+        params.put("date",date);//活动日期
+        params.put("chargePerson",chargePerson);//负责人
+        params.put("playFieldNum",playFieldNum);//场地数
+        params.put("startTime",startTime);//开始时间
+        params.put("endTime",endTime);//结束时间
+        params.put("venue",venue);//球馆名称
+        params.put("groupId",groupId);//群ID
+        params.put("contactNumber",contactNumber);//联系电话
+
+        HttpUtils.get(Api.SERVER_URL + Api.CREATE_ACTIVITY_RECORD, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                final String json = new String(responseBody);
+                Gson gson = new Gson();
+                Type type = new TypeToken<ApiResponse<Void>>() {
+                }.getType();
+                ApiResponse<ActivityRecord> apiResponse = gson.fromJson(json, type);
                 if (apiResponse.isSuccess()) {
                     listener.onSuccess(apiResponse.getMsg());
                 } else {

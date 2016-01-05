@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 
 import com.smallow.badminton.BadmintonApplication;
+import com.smallow.badminton.sys.ui.CustomProgressDialogThree;
 
 import smallow.core.AppAction;
 
@@ -31,6 +32,7 @@ public abstract class BaseActivity extends FragmentActivity {
         context = getApplicationContext();
         application = (BadmintonApplication) this.getApplication();
         appAction = application.getAppAction();
+        customProgressDialog=new CustomProgressDialogThree(this);
     }
 
     @Override
@@ -54,5 +56,46 @@ public abstract class BaseActivity extends FragmentActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private CustomProgressDialogThree customProgressDialog;
+
+
+
+    public void showLoadingDialog(final String text) {
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                customProgressDialog.setCancelable(false);
+                // TODO Auto-generated method stub
+                if (text != null) {
+                    customProgressDialog.setMsg(text);
+                }
+                try {
+                    if (!customProgressDialog.isShowing()) {
+                        customProgressDialog.show();
+                    }
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+    public void dismissLoadingDialog() {
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                if (customProgressDialog.isShowing()) {
+                    customProgressDialog.dismiss();
+                }
+            }
+        });
+
     }
 }

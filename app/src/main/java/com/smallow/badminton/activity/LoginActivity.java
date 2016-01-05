@@ -14,6 +14,7 @@ import com.smallow.badminton.R;
 import com.smallow.badminton.sys.base.BaseActivity;
 
 import smallow.core.ActionCallbackListener;
+import smallow.core.MD5;
 import smallow.model.Member;
 
 /**
@@ -60,16 +61,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         if(pwd==null || "".equals(pwd)){
             Toast.makeText(this,"请输入密码!",Toast.LENGTH_SHORT).show();
         }
-
-        application.getAppAction().login(mobile, pwd, new ActionCallbackListener<Member>() {
+        showLoadingDialog("正在登陆请稍后...");
+        application.getAppAction().login(mobile, MD5.crypt(pwd), new ActionCallbackListener<Member>() {
             @Override
             public void onSuccess(Member data) {
+                dismissLoadingDialog();
                 Toast.makeText(LoginActivity.this,"登陆成功:"+data.getName(),Toast.LENGTH_SHORT).show();
                 saveLoginInfo(data);
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
+                dismissLoadingDialog();
                 Toast.makeText(LoginActivity.this,"登陆失败:"+message,Toast.LENGTH_SHORT).show();
             }
         });
@@ -78,6 +81,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void saveLoginInfo(Member data) {
         sharedPreferences.edit().putInt("loginUserId",data.getId()).commit();
         sharedPreferences.edit().putInt("groupId",data.getGroupId()).commit();
+        sharedPreferences.edit().putString("name", data.getName()).commit();
+        sharedPreferences.edit().putString("roleType", data.getRoleType()).commit();
+        sharedPreferences.edit().putString("mobile",data.getMobile()).commit();
+        sharedPreferences.edit().putString("pwd",data.getPwd()).commit();
+
         //sharedPreferences.edit().putInt("")
         startActivity(new Intent(this, MainActivity.class));
         finish();
