@@ -29,7 +29,7 @@ public interface AppAction {
     public void registrateTodayActivity(Integer memberId,Integer activityRecordId,Integer groupId,ActionCallbackListener listener);
 
     //群主或者管理发起活动
-    public void createActivityRecord(String date,String chargePerson,String playFieldNum,String startTime,String endTime,String venue ,Integer groupId,String contactNumber,ActionCallbackListener listener);
+    public void createActivityRecord(String date,String chargePerson,String playFieldNum,String startTime,String endTime,String venue ,Integer groupId,String contactNumber,Integer createPersonId,ActionCallbackListener listener);
 
 
 

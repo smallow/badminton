@@ -56,10 +56,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         String pwd=mPwd.getEditableText().toString();
         if(mobile==null || "".equals(mobile)){
             Toast.makeText(this,"请输入手机号!",Toast.LENGTH_SHORT).show();
+            return ;
         }
 
         if(pwd==null || "".equals(pwd)){
             Toast.makeText(this,"请输入密码!",Toast.LENGTH_SHORT).show();
+            return;
         }
         showLoadingDialog("正在登陆请稍后...");
         application.getAppAction().login(mobile, MD5.crypt(pwd), new ActionCallbackListener<Member>() {

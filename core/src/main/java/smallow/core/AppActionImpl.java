@@ -221,7 +221,7 @@ public class AppActionImpl implements AppAction {
     }
 
     @Override
-    public void createActivityRecord(String date, String chargePerson, String playFieldNum, String startTime, String endTime, String venue,Integer groupId,String contactNumber,final ActionCallbackListener listener) {
+    public void createActivityRecord(String date, String chargePerson, String playFieldNum, String startTime, String endTime, String venue,Integer groupId,String contactNumber,Integer createPersonId,final ActionCallbackListener listener) {
         RequestParams params = new RequestParams();
         params.put("appKey", Api.APP_KEY);
         params.put("date",date);//活动日期
@@ -232,6 +232,7 @@ public class AppActionImpl implements AppAction {
         params.put("venue",venue);//球馆名称
         params.put("groupId",groupId);//群ID
         params.put("contactNumber",contactNumber);//联系电话
+        params.put("createPersonId",createPersonId);
 
         HttpUtils.get(Api.SERVER_URL + Api.CREATE_ACTIVITY_RECORD, params, new AsyncHttpResponseHandler() {
             @Override
@@ -250,7 +251,12 @@ public class AppActionImpl implements AppAction {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                listener.onFailure(new String(responseBody), error.getMessage());
+                if(responseBody!=null){
+                    listener.onFailure(new String(responseBody), error.getMessage());
+                }else{
+                    listener.onFailure("error", error.getMessage());
+                }
+
             }
         });
     }

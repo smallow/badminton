@@ -181,7 +181,6 @@ public class SplashActivity extends BaseActivity {
         sharedPreferences.edit().putString("pwd",data.getPwd());
 
         //sharedPreferences.edit().putInt("")
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
+
     }
 }

@@ -38,6 +38,8 @@ public class ActivityRecord implements Serializable {
     private String date_week;//星期几
     private String venue;//球馆
 
+    private String createPerson;//活动发起人
+
 
     public Integer getId() {
         return id;
@@ -157,5 +159,14 @@ public class ActivityRecord implements Serializable {
 
     public void setVenue(String venue) {
         this.venue = venue;
+    }
+
+
+    public String getCreatePerson() {
+        return createPerson;
+    }
+
+    public void setCreatePerson(String createPerson) {
+        this.createPerson = createPerson;
     }
 }

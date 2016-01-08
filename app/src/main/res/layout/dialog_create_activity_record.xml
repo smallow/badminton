@@ -191,7 +191,7 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/btn_dialog_submit"
+        android:id="@+id/btn_dialog_create_activity_record_submit"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="15dp"

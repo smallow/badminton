@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -141,6 +143,8 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
             public void onSuccess(ActivityRecord data) {
                 if (data != null) {
                     mStateView.setState(DataStateBox.State.HIDE);
+                    activityRecordLayout.setVisibility(View.VISIBLE);
+                    noActivityMessageLayout.setVisibility(View.GONE);
                     persons = data.getPersons();
                     mAdapter.setData(persons, true);
                     mChargePerson.setText(data.getChargePerson());
@@ -193,10 +197,41 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
             case R.id.layout_create_activity_record_choose_charge_person:
                 chooseChargePerson(chargePerson);
                 break;
+            case R.id.btn_dialog_create_activity_record_submit:
+                publishActivityRecord();
             default:
                 break;
         }
     }
+
+    /**
+     * 发布活动提交申请
+     */
+    private void publishActivityRecord() {
+        showLoadingDialog("正在发布活动请稍后...");
+        ((BadmintonApplication) getActivity().getApplication()).getAppAction().createActivityRecord(date.getText().toString(), chargePerson.getText().toString(), playFieldNumber.getEditableText().toString(), date.getText().toString()+" "+startTime.getText().toString(), date.getText().toString()+" "+endTime.getText().toString(), "农业路沙口路千羽球馆", groupId, contactPersonNumber.getEditableText().toString(),loginUserId, new ActionCallbackListener<String>() {
+            @Override
+            public void onSuccess(String message) {
+                dismissLoadingDialog();
+                Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+                initData();
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
+                dismissLoadingDialog();
+                dialog.dismiss();
+            }
+        });
+
+    }
+
+    /**
+     * 设置负责人
+     * @param chargePerson
+     */
 
     private void chooseChargePerson(final TextView chargePerson) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -219,20 +254,23 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
             }
         });
         builder.setView(view);
-        builder.setTitle("设置日期信息");
+        builder.setTitle("选择负责人");
         builder.create().show();
     }
 
     /**
-     * 群主或管理发起活动
+     * 打开活动发起窗口
      */
     TextView date,startTime,endTime,chargePerson;
+    EditText playFieldNumber,contactPersonNumber;
+    Button publishActivityRecord;
+    AlertDialog dialog;
     private void createActivityRecord() {
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
         View contentView=LayoutInflater.from(getActivity()).inflate(R.layout.dialog_create_activity_record, null);
         builder.setTitle("发起活动");
         builder.setView(contentView);
-        AlertDialog dialog=builder.create();
+        dialog=builder.create();
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
@@ -241,6 +279,9 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
         startTime= (TextView) contentView.findViewById(R.id.tv_dialog_create_activity_record_choose_start_time);
         endTime= (TextView) contentView.findViewById(R.id.tv_dialog_create_activity_record_choose_end_time);
         chargePerson= (TextView) contentView.findViewById(R.id.tv_dialog_create_activity_record_choose_charge_person);
+        publishActivityRecord= (Button) contentView.findViewById(R.id.btn_dialog_create_activity_record_submit);
+        playFieldNumber= (EditText) contentView.findViewById(R.id.etv_dialog_create_activity_record_play_field);
+        contactPersonNumber= (EditText) contentView.findViewById(R.id.etv_dialog_create_activity_record_contact_number);
         RelativeLayout chooseStartTime= (RelativeLayout) contentView.findViewById(R.id.layout_create_activity_record_choose_start_time);
         RelativeLayout chooseEndTime= (RelativeLayout) contentView.findViewById(R.id.layout_create_activity_record_choose_end_time);
         RelativeLayout chargePerson= (RelativeLayout) contentView.findViewById(R.id.layout_create_activity_record_choose_charge_person);
@@ -248,6 +289,7 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
         chooseStartTime.setOnClickListener(this);
         chooseEndTime.setOnClickListener(this);
         chargePerson.setOnClickListener(this);
+        publishActivityRecord.setOnClickListener(this);
     }
 
 
@@ -341,6 +383,15 @@ public class RegistrationFragment extends BaseFragment implements View.OnClickLi
      * 报名参加活动
      */
     private void submit() {
+        if(activityRecordId==null || "".equals(activityRecordId)){
+            Toast.makeText(getActivity(),"还没有人发布活动",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(loginUserId==null || "".equals(loginUserId)){
+            Toast.makeText(getActivity(),"请先登陆再报名",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         showLoadingDialog("正在提交数据,请稍后...");
         ((BadmintonApplication) getActivity().getApplication()).getAppAction().registrateTodayActivity(loginUserId,activityRecordId,groupId,new ActionCallbackListener<String>(){
             @Override
