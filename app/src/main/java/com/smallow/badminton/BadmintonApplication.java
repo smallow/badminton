@@ -3,6 +3,7 @@ package com.smallow.badminton;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.stetho.Stetho;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
@@ -26,6 +27,12 @@ public class BadmintonApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        /*Stetho.initialize(Stetho.newInitializerBuilder(this)
+                .enableDumpapp(
+                        Stetho.defaultDumperPluginsProvider(this))
+                .enableWebKitInspector(
+                        Stetho.defaultInspectorModulesProvider(this))
+                .build());*/
         appAction = new AppActionImpl(this);
         initImageLoader(getApplicationContext());
     }

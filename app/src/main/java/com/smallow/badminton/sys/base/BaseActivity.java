@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.smallow.badminton.BadmintonApplication;
 import com.smallow.badminton.sys.ui.CustomProgressDialogThree;
+import com.smallow.badminton.view.SimpleLoadingView;
 
 import smallow.core.AppAction;
 
@@ -33,6 +34,7 @@ public abstract class BaseActivity extends FragmentActivity {
         application = (BadmintonApplication) this.getApplication();
         appAction = application.getAppAction();
         customProgressDialog=new CustomProgressDialogThree(this);
+        simpleLoadingView=new SimpleLoadingView(this);
     }
 
     @Override
@@ -59,7 +61,7 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     private CustomProgressDialogThree customProgressDialog;
-
+    private SimpleLoadingView simpleLoadingView;
 
 
     public void showLoadingDialog(final String text) {
@@ -67,14 +69,14 @@ public abstract class BaseActivity extends FragmentActivity {
 
             @Override
             public void run() {
-                customProgressDialog.setCancelable(false);
+                simpleLoadingView.setCancelable(false);
                 // TODO Auto-generated method stub
                 if (text != null) {
-                    customProgressDialog.setMsg(text);
+                    simpleLoadingView.setMsg(text);
                 }
                 try {
-                    if (!customProgressDialog.isShowing()) {
-                        customProgressDialog.show();
+                    if (!simpleLoadingView.isShowing()) {
+                        simpleLoadingView.show();
                     }
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
@@ -91,8 +93,8 @@ public abstract class BaseActivity extends FragmentActivity {
             @Override
             public void run() {
                 // TODO Auto-generated method stub
-                if (customProgressDialog.isShowing()) {
-                    customProgressDialog.dismiss();
+                if (simpleLoadingView.isShowing()) {
+                    simpleLoadingView.dismiss();
                 }
             }
         });

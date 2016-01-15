@@ -7,12 +7,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.write_external_storage"></uses-permission>
 
-    <meta-data
-        android:name="design_width"
-        android:value="768"></meta-data>
-    <meta-data
-        android:name="design_height"
-        android:value="1280"></meta-data>
+
 
     <application
         android:name=".BadmintonApplication"

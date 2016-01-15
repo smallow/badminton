@@ -13,7 +13,7 @@ import android.widget.RadioGroup;
 import com.smallow.badminton.fragment.MineFragment;
 import com.smallow.badminton.fragment.RegistrationFragment;
 import com.smallow.badminton.sys.base.BaseActivity;
-import com.zhy.autolayout.AutoLayout;
+
 
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
@@ -33,7 +33,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        AutoLayout.getInstance().auto(this, true);
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         fragmentManager = getSupportFragmentManager();
         initView();
